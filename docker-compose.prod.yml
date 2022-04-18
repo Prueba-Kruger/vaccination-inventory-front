@@ -1,0 +1,23 @@
+version: '3.7'
+
+services:
+    vaccination-inventory-front-prod:
+        image: registry.megaprofer.com/vaccination-inventory-front:GIT_TAG
+        ports:
+            - 8140:443
+        environment:
+            - TZ=America/Guayaquil
+        networks:
+            - mega_picking_network
+
+        volumes:
+            - mega_picking_front_logs:/var/log/nginx
+        command: -c /vaccination-inventory/nginx/prod.nginx
+
+
+volumes:
+    mega_picking_front_logs:
+        external: true
+networks:
+    mega_picking_network:
+        external: true

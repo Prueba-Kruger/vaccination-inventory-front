@@ -1,0 +1,22 @@
+version: '3.7'
+
+services:
+    vaccination-inventory-front:
+        image: vaccination-inventory-front
+        environment:
+            - TZ=America/Guayaquil
+        networks:
+            - mega_picking_network
+        command: -c /vaccination-inventory/nginx/local.nginx
+        deploy:
+            resources:
+                limits:
+                    cpus: '0.50'
+                    memory: 512M
+                reservations:
+                    cpus: '0.25'
+                    memory: 256M
+
+networks:
+    mega_picking_network:
+        external: true

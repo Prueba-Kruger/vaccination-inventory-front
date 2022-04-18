@@ -1,0 +1,38 @@
+<!-- <img alt="login" class="image" src="../../../../assets/layout/images/login/login-image2.png"> -->
+<p-toast key="tst" [style]="{marginTop: '70px'}" sticky='true' life="6000"></p-toast>
+
+<div class="login-body">
+    <div class="login-panel p-fluid">
+        <div class="p-grid p-nogutter">
+            <div class="p-col-12 login-header">
+                <h1>BIENVENIDO</h1>
+                <h2>Sistema de inventario de vacunación </h2>
+                <img alt="logo login" id="logo" src="assets/layout/images/login/pick2.png">
+            </div>
+            <div class="p-col-12">
+                <span class="p-float-label">
+                    <input [maxlength]="40" type="text" pInputText [(ngModel)]="user" autocomplete="off"
+                        [ngClass]="uiUtils.checkVal(this.user)" (keydown.enter)="onClickAcceptButton()"
+                        placeholder="Usuario">
+                    <label *ngIf="user.length > 0">Usuario</label>
+                </span>
+            </div>
+            <div class="p-col-12">
+                <span class="p-float-label p-input-icon-right">
+                    <i style="cursor: pointer;" [ngClass]="visiblePassword? 'pi pi-eye-slash':'pi pi-eye'"
+                        (click)="visiblePassword=!visiblePassword"></i>
+                    <input [maxlength]="40" [type]="visiblePassword? 'password' : 'text'" pPassword [feedback]="false"
+                        [(ngModel)]="password" [ngClass]="uiUtils.checkVal(this.password)" autocomplete="off"
+                        placeholder="Contraseña" (keydown.enter)="onClickAcceptButton()">
+                    <label *ngIf="password.length > 0">Contraseña</label>
+                </span>
+            </div>
+            <div class="p-col-12 p-align-center">
+                <button pButton type="button" class="p-button-raised p-button-rounded" label="Ingresar"
+                    (click)="onClickAcceptButton()" icon="pi pi-user"></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>

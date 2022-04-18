@@ -1,0 +1,8 @@
+version: '3.7'
+
+services:
+    vaccination-inventory-front:
+        image: registry.megaprofer.com/vaccination-inventory-front:${GIT_COMMIT}
+        command: -c /vaccination-inventory/nginx/int.nginx
+        ports:
+            - 8040:80

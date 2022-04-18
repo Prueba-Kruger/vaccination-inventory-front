@@ -1,1 +1,165 @@
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@import "~@angular/material/theming";
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat-core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$vaccination-inventory-front-primary: mat-palette($mat-indigo);
+$vaccination-inventory-front-accent: mat-palette($mat-pink, A200, A100, A400);
+
+// The warn palette is optional (defaults to red).
+$vaccination-inventory-front-warn: mat-palette($mat-red);
+
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as "color" or "typography".
+$vaccination-inventory-front-theme: mat-light-theme(
+  (
+    color: (
+      primary: $vaccination-inventory-front-primary,
+      accent: $vaccination-inventory-front-accent,
+      warn: $vaccination-inventory-front-warn,
+    ),
+  )
+);
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include angular-material-theme($vaccination-inventory-front-theme);
+
 /* You can add global styles to this file, and also import other style files */
+@import "../node_modules/primeng/resources/primeng.min.css";
+@import "../node_modules/primeflex/primeflex.scss";
+@import "../node_modules/primeicons/primeicons.css";
+@import "../node_modules/prismjs/themes/prism-coy.css";
+@import "../node_modules/@fullcalendar/core/main.min.css";
+@import "../node_modules/@fullcalendar/daygrid/main.min.css";
+@import "../node_modules/@fullcalendar/timegrid/main.min.css";
+@import "assets/demo/flags/flags.css";
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.flex-end {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.flex-around {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.self-end {
+  display: flex;
+  justify-self: flex-end;
+  align-items: center;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.flex-start {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.p-multiselect .p-multiselect-label {
+  padding: 4px;
+}
+.p-sidebar-right.p-sidebar-active {
+  transform: translateX(0);
+  height: 95%;
+  margin-top: 5%;
+}
+.elli {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.ellirtl {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  direction: rtl
+}
+.p-datatable .p-datatable-thead > tr > th {
+  text-align: left;
+  padding: 1 rem 1rem;
+  border: 1px solid #e4e4e4;
+  border-width: 0 0 1px 0;
+  font-weight: 500;
+  color: #000001;
+  background: #f5f5f5;
+  transition: none;
+}
+.top {
+  background-color: #f5f5f5;
+}
+.inputSelected {
+  color: #edf5ea;
+  background-color: rgb(151, 150, 150);
+}
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.btn-succees {
+  background-color: rgb(198, 236, 159);
+}
+.btn-error {
+  background-color: rgba(252, 29, 29, 0.719);
+  color: #edf5ea;
+}
+.p-dialog-content {
+  overflow-y: unset;
+}
+.swal2-container {
+  z-index: 2000 !important;
+}
