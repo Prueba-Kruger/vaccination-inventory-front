@@ -55,12 +55,12 @@ export class AppTopbarComponent {
     logout() {
         // this.blockUi();
         localStorage.clear();
-        const status = localStorage.getItem('authorization');
-        if (status == null) {
-            // window.location.reload();
-            this.router.navigate(['/login']);
-            window.location.href = window.location.href;
-        }
+        // const status = localStorage.getItem('authorization');
+        // if (status == null) {
+        // window.location.reload();
+        this.router.navigate(['./sing-in/login']);
+        // window.location.href = window.location.href;
     }
+
 
 }

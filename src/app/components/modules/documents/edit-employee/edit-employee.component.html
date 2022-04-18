@@ -1,7 +1,10 @@
 <div class="cont">
     <div class="title">
-        <div class="name">
+        <div class="name" *ngIf="selectedEmployee">
             <h2>EMPLEADO {{selectedEmployee?.firstName}} - {{selectedEmployee?.dni}}</h2>
+        </div>
+        <div class="name" *ngIf="!selectedEmployee">
+            <h2>NUEVO EMPLEADO </h2>
         </div>
         <div class="exit">
 
@@ -17,7 +20,7 @@
                 <div class="line">
                     <mat-form-field appearance="outline">
                         <mat-label> DNI </mat-label>
-                        <input class="input" matInput [maxlength]="40" formControlName="dni">
+                        <input type="number" class="input" matInput [maxlength]="40" formControlName="dni">
                         <mat-error *ngIf="formControl.dni.errors?.required">
                             Campo <strong>requerido.</strong>
                         </mat-error>
@@ -44,59 +47,83 @@
                     </mat-form-field>
                     <mat-form-field appearance="outline">
                         <mat-label> MAIL</mat-label>
-                        <input type="number" class="input" matInput [maxlength]="40" formControlName="mail">
+                        <input type="text" class="input" matInput [maxlength]="40" formControlName="mail">
                         <mat-error *ngIf="formControl.mail.errors?.required">
+                            Campo <strong>requerido.</strong>
+                        </mat-error>
+                        <mat-error *ngIf="formControl.mail.errors?.email">
                             Campo <strong>requerido.</strong>
                         </mat-error>
                     </mat-form-field>
                 </div>
                 <div class="line">
-                    <mat-form-field appearance="outline">
-                        <mat-label> FECHA DE NACIMIENTO </mat-label>
-                        <input type="number" class="input" matInput [maxlength]="40" formControlName="dateOfBirth">
-                    </mat-form-field>
+                    <p-calendar [style]="{'width':'200px','height':'45px'}" placeholder="Fecha de nacimiento"
+                        [showIcon]="true">
+                    </p-calendar>
                     <mat-form-field appearance="outline">
                         <mat-label> DIRECCIÓN </mat-label>
-                        <input type="number" class="input" matInput [maxlength]="40" formControlName="address">
+                        <input type="text" class="input" matInput [maxlength]="40" formControlName="address">
                     </mat-form-field>
                     <mat-form-field appearance="outline">
                         <mat-label> TELÉFONO </mat-label>
                         <input type="number" class="input" matInput [maxlength]="40" formControlName="phone">
                     </mat-form-field>
-                    <mat-form-field appearance="outline">
-                        <mat-label> ESTADO </mat-label>
-                        <input type="number" class="input" matInput [maxlength]="40" formControlName="status">
-                    </mat-form-field>
+                    <p-dropdown [style]="{'width':'200px','height':'45px'}" [options]="status" formControlName="status"
+                        defaultLabel="Estados" optionLabel="name">
+                    </p-dropdown>
                 </div>
-                <div class="vaccine">
-                    <div class="tit">
-                        INFORMACIÓN DE VACUNAS
-                        <span class="material-icons" (click)="newVaccine()">
-                            add
-                        </span>
-                        <div class="title">
-                            <div>Vacuna: </div>
-                            <div> Estad: </div>
-                            <div> Dosis: </div>
-                        </div>
-                        <p-scrollPanel [style]="{width: '100%',height:'200px'}">
-                            <div class="vaccines" *ngFor="let vaccines of this.selectedVaccines">
-                                <div class="vaccines">
-                                    <div><strong>Vacuna: </strong>{{vaccines?.name}} </div>
-                                    <div> <strong>Estado:</strong> {{vaccines?.date}} </div>
-                                    <div> <strong>Dosis:</strong> {{vaccines?.dose}} </div>
-                                </div>
-                            </div>
-                        </p-scrollPanel>
+            </form>
+            <div class="vaccine" *ngIf="!showNewVaccine">
+                <div class="tit">
+                    INFORMACIÓN DE VACUNAS
+                    <span class="material-icons" (click)="newVaccine()">
+                        add
+                    </span>
+                    <div class="title">
+                        <div><strong> Vacuna:</strong> </div>
+                        <div><strong> Fecha:</strong> </div>
+                        <div><strong> Dosis:</strong> </div>
                     </div>
-                    <div class="line">
+                    <p-scrollPanel [style]="{width: '100%',height:'200px'}">
+                        <div class="lines" *ngFor="let vaccines of this.selectedVaccines">
+                            <div class="line">
+                                <div> {{vaccines?.vaccinePresenter.name}} </div>
+                                <div> {{vaccines?.date}} </div>
+                                <div> {{vaccines?.dose}} </div>
+                            </div>
+                        </div>
+                    </p-scrollPanel>
+                </div>
+            </div>
+            <div class="vaccine" *ngIf="showNewVaccine">
+                <div class="tit">
+                    AGREGAR VACUNA
+                    <div class="tit1"><strong>Vacuna: </strong>
+                        <p-dropdown [(ngModel)]="selectedVaccine" [style]="{'width':'200px','height':'45px'}"
+                            [options]="vaccinesSelects" defaultLabel="Estados" optionLabel="name">
+                        </p-dropdown>
+                    </div>
+                    <div class="tit1"><strong>Fecha:</strong>
+                        <p-calendar [(ngModel)]="dateVaccine" [style]="{'width':'200px','height':'45px'}"
+                            placeholder="Fecha de nacimiento" [showIcon]="true">
+                        </p-calendar>
+                    </div>
+                    <div class="tit1"><strong>Dosis:</strong>
+                        <input [(ngModel)]="dose" type="number" class="input" [maxlength]="2" [disabled]="true"
+                            [style]="{'width':'200px','height':'45px'}">
 
                     </div>
                 </div>
-                <div class="buttons">
-                    <p-button styleClass="p-button-primary " type="submit"> {{btnName}}</p-button>
-                </div>
-            </form>
+            </div>
+            <div class="buttons" *ngIf="!showNewVaccine">
+                <p-button styleClass="p-button-primary " type="submit"> {{btnName}}</p-button>
+            </div>
+            <div class="buttons" *ngIf="showNewVaccine">
+                <p-button styleClass="p-button-primary " (onClick)="newVaccine()"> Cancelar</p-button>
+                <p-button styleClass="p-button-primary " (onClick)="addVaccine()"> Agregar vacuna</p-button>
+
+            </div>
+
         </mat-step>
 
     </mat-horizontal-stepper>

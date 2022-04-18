@@ -5,13 +5,13 @@ import { DialogService } from 'primeng/dynamicdialog';
 import { Subject, Subscription } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { AbstractView } from 'src/app/app.core/abstract_view';
-import { Employee } from 'src/app/model/employee';
 import { EditEmployeeComponent } from '../edit-employee/edit-employee.component';
 import { EmployeesView } from './employees.view';
 import { EmployeesPresenter } from './presenter/employees.presenter';
 import Swal from 'sweetalert2';
 import { Status } from 'src/app/model/status';
 import { User } from 'src/app/model/user.model';
+import { EmployeePresenter } from 'src/app/model/employee';
 
 @Component({
   selector: 'app-employees',
@@ -23,8 +23,8 @@ export class EmployeesComponent extends AbstractView implements OnInit, OnDestro
   dockNum$ = new Subject<string>();
   dockNumSubscription: Subscription;
 
-  employees: Employee[] = [];
-  selectedEmployee: Employee;
+  employees: EmployeePresenter[] = [];
+  selectedEmployee: EmployeePresenter;
   searchValue = '';
   page = 0;
   size = 10;
@@ -65,20 +65,20 @@ export class EmployeesComponent extends AbstractView implements OnInit, OnDestro
   findEmployees() {
     this.employeesPresenter.findEmployees();
   }
-  getEmployeeId(employee: Employee) {
+  getEmployeeId(employee: EmployeePresenter) {
     // if (this.loginUser.userId===employee.) {
 
     // }
     this.selectedEmployee = employee;
     this.employeesPresenter.getEmployeeId();
   }
-  showEmployeeComponent(workOrder: Employee) {
+  showEmployeeComponent(workOrder: EmployeePresenter) {
     this.ref = this.dialogService.open(EditEmployeeComponent, {
       showHeader: false,
       closeOnEscape: true,
       data: workOrder
     });
-    this.ref.onClose.subscribe((res: Employee) => {
+    this.ref.onClose.subscribe((res: EmployeePresenter) => {
       if (res) {
         this.showSuccess('Éxito', 'Empleado ' + res.dni + ' actualizado');
       }
@@ -86,7 +86,7 @@ export class EmployeesComponent extends AbstractView implements OnInit, OnDestro
 
     });
   }
-  showDeleteEmplote(workOrder: Employee) {
+  showDeleteEmplote(workOrder: EmployeePresenter) {
     Swal.fire({
       text: 'Está seguro que quiere eliminar?',
       showCancelButton: true,

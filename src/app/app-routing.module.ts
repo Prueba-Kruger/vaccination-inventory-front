@@ -14,7 +14,7 @@ import { AppNotfoundComponent } from './components/pages/app.notfound.component'
                 // canActivate: [AuthGuard]
             },
 
-            { path: '', redirectTo: 'main', pathMatch: 'full' },
+            { path: '', redirectTo: 'sing-in/login', pathMatch: 'full' },
             {
                 path: '',
                 loadChildren: () => import('./components/modules/sing-in/sing-in.module').then((m) => m.SingInModule),

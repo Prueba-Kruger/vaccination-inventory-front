@@ -1,9 +1,9 @@
 import { View } from 'src/app/app.core/view';
-import { Employee } from 'src/app/model/employee';
+import { EmployeePresenter } from 'src/app/model/employee';
 
 export interface EmployeesView extends View {
-    employees: Employee[];
-    selectedEmployee: Employee;
+    employees: EmployeePresenter[];
+    selectedEmployee: EmployeePresenter;
     searchValue: string;
     page: number;
     size: number;
@@ -13,7 +13,7 @@ export interface EmployeesView extends View {
     status: any[];
     statusSelected: any;
 
-    showEmployeeComponent(workOrder: Employee);
+    showEmployeeComponent(workOrder: EmployeePresenter);
 
 }
 

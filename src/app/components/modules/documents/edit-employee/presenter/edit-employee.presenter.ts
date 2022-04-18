@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Presenter } from 'src/app/app.core/presenter';
-import { Employee } from 'src/app/model/employee';
-import { Vaccine } from 'src/app/model/vaccine';
+import { EmployeePresenter, EmployeeVaccinePresenter } from 'src/app/model/employee';
 import { EmployeeService } from 'src/app/services/employee.service';
 import { EditEmployeesView } from '../edit-employee.view';
 
@@ -16,7 +15,7 @@ export class EditEmployeesPresenter implements Presenter {
     ) { }
 
     updateEmployee(form: any) {
-        const employee: Employee = this.createEmployee(form);
+        const employee: EmployeePresenter = this.createEmployee(form);
         this.view.blockUi();
         this.employeeService.saveEmployee(employee).subscribe((res: any) => {
             if (res) {
@@ -26,8 +25,8 @@ export class EditEmployeesPresenter implements Presenter {
             this.view.showBackException(error);
         });
     }
-    createEmployee(form: any): Employee {
-        const employee: Employee = {
+    createEmployee(form: any): EmployeePresenter {
+        const employee: EmployeePresenter = {
             employeeId: this.view.selectedEmployee ? this.view.selectedEmployee.employeeId : null,
             dni: form.value.dni,
             firstName: form.value.firstName,
@@ -37,21 +36,24 @@ export class EditEmployeesPresenter implements Presenter {
             address: form.value.address,
             phone: form.value.phone,
             status: form.value.status,
-            vaccines: this.createVaccines()
+            employeeVaccinePresenters: this.createVaccines()
         };
         return employee;
     }
-    createVaccines(): Vaccine[] {
-        const vacinnes: Vaccine[] = [];
+    createVaccines(): EmployeeVaccinePresenter[] {
+        const vacinnes: EmployeeVaccinePresenter[] = [];
         this.view.selectedVaccines.forEach(vaccine => {
-            const vacinne: Vaccine = {
-                vaccineId: vaccine.vaccineId,
-                name: vaccine.name,
-                description: vaccine.description,
+            const newVacinne: EmployeeVaccinePresenter = {
+                employeeVaccineId: vaccine.employeeVaccineId,
+                vaccinePresenter: {
+                    vaccineId: vaccine.vaccinePresenter.vaccineId,
+                    name: vaccine.vaccinePresenter.name,
+                    description: vaccine.vaccinePresenter.description,
+                },
                 date: vaccine.date,
                 dose: vaccine.dose
             };
-            vacinnes.push(vaccine);
+            vacinnes.push(newVacinne);
         });
         return vacinnes;
     }

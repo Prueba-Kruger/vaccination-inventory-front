@@ -30,23 +30,39 @@
                 display: flex;
                 justify-content: space-around;
             }
-            .vaccine {
+            .buttons {
                 width: 100%;
-                height: 200px;
-                .tit {
+                display: flex;
+                justify-content: center;
+            }
+        }
+        .vaccine {
+            width: 100%;
+            height: 200px;
+            .tit {
+                width: 100%;
+                .tit1 {
                     width: 100%;
-                    .title {
+
+                    span {
+                        width: 50px;
+                    }
+                }
+                .title {
+                    width: 100%;
+                    height: 20px;
+                    display: flex;
+                    justify-content: space-around;
+                }
+                .lines {
+                    width: 100%;
+                    .line {
                         width: 100%;
                         height: 20px;
                         display: flex;
                         justify-content: space-around;
                     }
                 }
-            }
-            .buttons {
-                width: 100%;
-                display: flex;
-                justify-content: center;
             }
         }
     }

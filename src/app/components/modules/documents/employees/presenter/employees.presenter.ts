@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { valueToObjectRepresentation } from '@apollo/client/utilities';
 import { Presenter } from 'src/app/app.core/presenter';
-import { Employee } from 'src/app/model/employee';
+import { EmployeePresenter } from 'src/app/model/employee';
 import { EmployeeService } from 'src/app/services/employee.service';
 import { EmployeesView } from '../employees.view';
 
@@ -49,7 +48,7 @@ export class EmployeesPresenter implements Presenter {
             this.view.allowUi();
         });
     }
-    deleteEmplote(employee: Employee) {
+    deleteEmplote(employee: EmployeePresenter) {
         this.view.blockUi();
         this.employeeService.getEmployeeById(employee.employeeId).subscribe((res: any) => {
             if (res) {

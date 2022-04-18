@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { Employee } from '../model/employee';
+import { EmployeePresenter } from '../model/employee';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +19,7 @@ export class EmployeeService {
   deleteEmployeeById(employeeId: string) {
     return this.http.get(environment.apiUrl + '/deleteEmployeeById?employeeId=' + employeeId);
   }
-  saveEmployee(employee: Employee) {
-    return this.http.post(environment.apiUrl + '/saveEmployee', employee);
+  saveEmployee(employeesPresenter: EmployeePresenter) {
+    return this.http.post(environment.apiUrl + '/saveEmployee', employeesPresenter);
   }
 }

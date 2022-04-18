@@ -1,11 +1,12 @@
 import { View } from 'src/app/app.core/view';
-import { Employee } from 'src/app/model/employee';
-import { Vaccine } from 'src/app/model/vaccine';
+import { EmployeePresenter, EmployeeVaccinePresenter } from 'src/app/model/employee';
 
 export interface EditEmployeesView extends View {
-    selectedEmployee: Employee;
-    selectedVaccines: Vaccine[];
-
-    closeView(workOrder: Employee);
+    selectedEmployee: EmployeePresenter;
+    selectedVaccines: EmployeeVaccinePresenter[];
+    date: Date;
+    status: any[];
+    statusSelected: any;
+    closeView(workOrder: EmployeePresenter);
 }
 
