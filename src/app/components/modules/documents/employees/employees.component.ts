@@ -10,6 +10,8 @@ import { EditEmployeeComponent } from '../edit-employee/edit-employee.component'
 import { EmployeesView } from './employees.view';
 import { EmployeesPresenter } from './presenter/employees.presenter';
 import Swal from 'sweetalert2';
+import { Status } from 'src/app/model/status';
+import { User } from 'src/app/model/user.model';
 
 @Component({
   selector: 'app-employees',
@@ -28,6 +30,12 @@ export class EmployeesComponent extends AbstractView implements OnInit, OnDestro
   size = 10;
   totalElements = 0;
   ref: any;
+  initDate = new Date();
+  endDate = new Date();
+  status: { name: string, value: Status }[];
+  statusSelected: Status[] = [];
+  loginUser: User;
+
   constructor(
     public router: Router,
     public messageService: MessageService,
@@ -38,6 +46,11 @@ export class EmployeesComponent extends AbstractView implements OnInit, OnDestro
     employeesPresenter.view = this;
   }
   ngOnInit(): void {
+    this.loginUser = JSON.parse(localStorage.getItem('user'));
+    this.status = [
+      { name: 'Vacunado', value: Status.VACCINE },
+      { name: 'No vacunado', value: Status.NOT_VACCINE },
+    ];
     this.dockNumSubscription = this.dockNum$.pipe(debounceTime(1500)).subscribe(res => this.findEmployees());
     this.findEmployees();
   }
@@ -52,8 +65,11 @@ export class EmployeesComponent extends AbstractView implements OnInit, OnDestro
   findEmployees() {
     this.employeesPresenter.findEmployees();
   }
-  getEmployeeId(workOrder: Employee) {
-    this.selectedEmployee = workOrder;
+  getEmployeeId(employee: Employee) {
+    // if (this.loginUser.userId===employee.) {
+
+    // }
+    this.selectedEmployee = employee;
     this.employeesPresenter.getEmployeeId();
   }
   showEmployeeComponent(workOrder: Employee) {

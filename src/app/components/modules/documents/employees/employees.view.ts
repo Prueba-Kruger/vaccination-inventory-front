@@ -8,6 +8,10 @@ export interface EmployeesView extends View {
     page: number;
     size: number;
     totalElements: number;
+    initDate: Date;
+    endDate: Date;
+    status: any[];
+    statusSelected: any;
 
     showEmployeeComponent(workOrder: Employee);
 

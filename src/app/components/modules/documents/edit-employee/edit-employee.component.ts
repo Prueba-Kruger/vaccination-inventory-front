@@ -77,4 +77,8 @@ export class EditEmployeeComponent extends AbstractView implements OnInit, EditE
     }
     this.editEmployeesPresenter.updateEmployee(this.form);
   }
+  newVaccine() {
+
+  }
+
 }

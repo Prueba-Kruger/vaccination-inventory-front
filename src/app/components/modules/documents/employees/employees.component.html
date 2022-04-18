@@ -8,13 +8,23 @@
                     [(ngModel)]="searchValue" (ngModelChange)="getWorkOrders()">
                 <label for="float-input">Busque un empleado...</label>
             </span>
+            <p-calendar [style]="{'width':'300px','height':'40px'}" placeholder="Desde" [showIcon]="true"
+                [(ngModel)]="initDate">
+            </p-calendar>
+            <p-calendar [style]="{'width':'300px','height':'40px'}" placeholder="Hasta" [showIcon]="true"
+                [(ngModel)]="endDate">
+            </p-calendar>
+            <p-multiSelect [style]="{'width':'300px','height':'40px'}" [maxSelectedLabels]="0"
+                [selectedItemsLabel]="'{0} Estados'" [options]="status" [showHeader]="false"
+                [(ngModel)]="statusSelected" defaultLabel="Estados" optionLabel="name">
+            </p-multiSelect>
         </div>
     </div>
     <div class="p-grid table-demo">
         <div class="p-col-12">
             <div class="card">
                 <div class="tit">
-                    <h2>Ordenes de trabajo</h2>
+                    <h2>Empleados</h2>
                     <span class="material-icons" (click)="showEmployeeComponent(null)">
                         add
                     </span>
