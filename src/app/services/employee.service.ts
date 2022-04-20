@@ -10,8 +10,9 @@ export class EmployeeService {
 
   constructor(private http: HttpClient) { }
 
-  getEmployeesPaginated(searchValue: string, page: number, size: number) {
-    return this.http.get(environment.apiUrl + '/getEmployeesPaginated?searchValue=' + searchValue + '&page=' + page + '&size=' + size);
+  getEmployeesPaginated(searchValue: string, page: number, size: number, initDate: string, endDate: string, status: string[]) {
+    return this.http.get(environment.apiUrl + '/getEmployeesPaginated?searchValue=' + searchValue + '&page=' + page + '&size=' + size
+      + '&initDate=' + initDate + '&endDate=' + endDate + '&status=' + status);
   }
   getEmployeeById(employeeId: string) {
     return this.http.get(environment.apiUrl + '/getWorkOrderById?employeeId=' + employeeId);
@@ -20,6 +21,6 @@ export class EmployeeService {
     return this.http.get(environment.apiUrl + '/deleteEmployeeById?employeeId=' + employeeId);
   }
   saveEmployee(employeesPresenter: EmployeePresenter) {
-    return this.http.post(environment.apiUrl + '/saveEmployee', employeesPresenter);
+    return this.http.post(environment.apiUrl + '/saveUpdateEmployee', employeesPresenter);
   }
 }

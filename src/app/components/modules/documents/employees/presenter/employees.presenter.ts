@@ -1,3 +1,4 @@
+import { formatDate } from '@angular/common';
 import { Injectable } from '@angular/core';
 import { Presenter } from 'src/app/app.core/presenter';
 import { EmployeePresenter } from 'src/app/model/employee';
@@ -14,6 +15,12 @@ export class EmployeesPresenter implements Presenter {
         private employeeService: EmployeeService
     ) { }
     findEmployees() {
+        const format = 'yyyy-MM-dd hh:mm:ss';
+        const locale = 'en-US';
+        let initDate = '';
+        let endDate = '';
+        let status: string[] = [];
+
         const searchValue = this.view.searchValue;
         const page = this.view.page;
         const size = this.view.size;
@@ -23,8 +30,15 @@ export class EmployeesPresenter implements Presenter {
         if (!size || size < 1) {
             return;
         }
+        if (this.view.statusSelected.length) {
+            this.view.statusSelected.forEach(element => status.push(element.value));
+        } else {
+            status = ['VACCINE', 'NOT_VACCINE'];
+        }
+        initDate = formatDate(this.view.initDate, format, locale);
+        endDate = formatDate(this.view.endDate, format, locale);
         this.view.blockUi();
-        this.employeeService.getEmployeesPaginated(searchValue, page, size).subscribe((res: any) => {
+        this.employeeService.getEmployeesPaginated(searchValue, page, size, initDate, endDate, status).subscribe((res: any) => {
             if (res) {
                 this.view.employees = res.data;
                 this.view.totalElements = res.totalElements;

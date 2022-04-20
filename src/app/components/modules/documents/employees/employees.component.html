@@ -8,16 +8,18 @@
                     [(ngModel)]="searchValue" (ngModelChange)="getWorkOrders()">
                 <label for="float-input">Busque un empleado...</label>
             </span>
-            <p-calendar [style]="{'width':'300px','height':'40px'}" placeholder="Desde" [showIcon]="true"
-                [(ngModel)]="initDate">
-            </p-calendar>
-            <p-calendar [style]="{'width':'300px','height':'40px'}" placeholder="Hasta" [showIcon]="true"
-                [(ngModel)]="endDate">
-            </p-calendar>
             <p-multiSelect [style]="{'width':'300px','height':'40px'}" [maxSelectedLabels]="0"
                 [selectedItemsLabel]="'{0} Estados'" [options]="status" [showHeader]="false"
-                [(ngModel)]="statusSelected" defaultLabel="Estados" optionLabel="name">
+                [(ngModel)]="statusSelected" defaultLabel="Estados" optionLabel="name"
+                (ngModelChange)="findEmployees()">
             </p-multiSelect>
+            <p-calendar [style]="{'width':'300px','height':'40px'}" placeholder="Desde" [showIcon]="true"
+                [(ngModel)]="initDate" (ngModelChange)="findEmployees()">
+            </p-calendar>
+            <p-calendar [style]="{'width':'300px','height':'40px'}" placeholder="Hasta" [showIcon]="true"
+                [(ngModel)]="endDate" (ngModelChange)="findEmployees()">
+            </p-calendar>
+
         </div>
     </div>
     <div class="p-grid table-demo">
@@ -50,7 +52,7 @@
                             <td> {{workOrder.dateOfBirth |date}} </td>
                             <td> {{workOrder.address}} </td>
                             <td> {{workOrder.phone}} </td>
-                            <td> {{workOrder.status}} </td>
+                            <td> {{translateStatus(workOrder.status)}} </td>
                             <td>
                                 <span class="material-icons" (click)="getEmployeeId(workOrder)">
                                     edit

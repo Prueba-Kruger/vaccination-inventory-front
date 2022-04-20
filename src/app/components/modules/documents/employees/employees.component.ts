@@ -81,6 +81,7 @@ export class EmployeesComponent extends AbstractView implements OnInit, OnDestro
     this.ref.onClose.subscribe((res: EmployeePresenter) => {
       if (res) {
         this.showSuccess('Éxito', 'Empleado ' + res.dni + ' actualizado');
+        this.findEmployees();
       }
       this.ref = null;
 
@@ -103,6 +104,13 @@ export class EmployeesComponent extends AbstractView implements OnInit, OnDestro
       return;
     }
     this.dockNum$.next(this.searchValue);
+  }
+  translateStatus(status: Status) {
+    if (status === 'NOT_VACCINE') {
+      return 'No vacunado ';
+    } else if (status === 'VACCINE') {
+      return 'Vacunado';
+    }
   }
 
 }

@@ -15,7 +15,7 @@
     </div>
     <mat-horizontal-stepper #stepperNew class="newPickingLoad">
         <mat-step label="INFORMACIÓN">
-            <form class="form" [formGroup]="form" (submit)="updateEmployee()">
+            <form class="form" [formGroup]="form">
 
                 <div class="line">
                     <mat-form-field appearance="outline">
@@ -85,7 +85,7 @@
                         <div><strong> Dosis:</strong> </div>
                     </div>
                     <p-scrollPanel [style]="{width: '100%',height:'200px'}">
-                        <div class="lines" *ngFor="let vaccines of this.selectedVaccines">
+                        <div class="lines" *ngFor="let vaccines of this.selectedEmployee.employeeVaccinePresenters">
                             <div class="line">
                                 <div> {{vaccines?.vaccinePresenter.name}} </div>
                                 <div> {{vaccines?.date}} </div>
@@ -100,7 +100,7 @@
                     AGREGAR VACUNA
                     <div class="tit1"><strong>Vacuna: </strong>
                         <p-dropdown [(ngModel)]="selectedVaccine" [style]="{'width':'200px','height':'45px'}"
-                            [options]="vaccinesSelects" defaultLabel="Estados" optionLabel="name">
+                            [options]="vaccines" defaultLabel="Estados" optionLabel="name">
                         </p-dropdown>
                     </div>
                     <div class="tit1"><strong>Fecha:</strong>
@@ -116,7 +116,8 @@
                 </div>
             </div>
             <div class="buttons" *ngIf="!showNewVaccine">
-                <p-button styleClass="p-button-primary " type="submit"> {{btnName}}</p-button>
+                <p-button styleClass="p-button-primary " type="submit" (onClick)="updateEmployee()"> {{btnName}}
+                </p-button>
             </div>
             <div class="buttons" *ngIf="showNewVaccine">
                 <p-button styleClass="p-button-primary " (onClick)="newVaccine()"> Cancelar</p-button>
